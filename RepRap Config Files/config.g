@@ -1,0 +1,82 @@
+; Configuration file for Liquid 3D Printer
+; Duet WiFi 1.04
+
+; General preferences
+G90											; Send absolute coordinates
+M83											; Relative extruder moves
+
+; Network
+M552 S0										; Disable network
+M550 P"Liquid"								; Set machine name
+ ; M551 P""									; Set password
+M552 S1										; Enable network
+M586 P0 S1									; Enable HTTP
+M586 P1 S0									; Disable FTP
+M586 P2 S0									; Disable Telnet
+
+; Drives
+M669 K1										; CoreXY kinematics
+M569 P0 S0									; Drive 0 goes backwards
+M569 P1 S0									; Drive 1 goes forwards
+M569 P2 S0									; Drive 2 goes forwards
+M569 P3 S0									; Drive 3 goes forwards
+M350 X16 Y16 Z16 E16 I1						; Configure microstepping with interpolation
+M92 X80 Y80 Z400 E415						; Set steps per mm
+M201 X5000 Y5000 Z200 E9000					; Set maximum accelerations, mm/sec^2
+M203 X12000 Y12000 Z1800 E7200				; Set maximum speeds (mm/min)
+M204 S4000 T5000							; Set acceleration (S) and travel acceleration (T)
+M566 X1800 Y1800 Z12 E300					; Set the jerk limits, mm/min
+M906 X1200 Y1200 Z1200 E1200 I30			; Set motor currents(mA) and motor idle factor in %
+M84 S30										; Set idle timeout
+; M593 F100									; Cancel ringing at 100Hz
+M572 D0 S0.3								; Pressure advance for extruder 0
+
+; Axis Limits
+M208 X0 Y-3 Z0 S1							; Set axis minim
+M208 X200 Y201 Z200 S0						; Set axis maxim
+
+; Endstops
+M915 X Y S2									; Set stall detection
+M574 X1 Y1 S3								; Set endstops controlled by motor load detection
+M591 D0 P5 C"e0stop" R5:105 E3.0 S1  		; Duet3D laser sensor for extruder drive 0, connected to endstop input 3 (E0), tolerance 5 to 80%, 3mm comparison length, enabled
+
+; Z-Probe
+M574 Z1 S2									; Set endstops controlled by probe   
+M558 P5 C"!zprobe.in" I1 H5 F200 T8000		; Set Z probe type/mode 5. H=Dive Height. F=Speed the bed moves
+M556 S0 X0 Y0 Z0							; Set orthogonal axis compensation parameters
+ ; M557 X42:198 Y10:196 S52:62				; Define mesh grid (16 points)
+M557 X42:198 Y10:196 S78:93					; Define mesh grid (9 points)
+G31 P25 X40 Y1 Z1.15						; Set Z probe trigger value, offset and trigger height 
+M376 H3										; Set bed compensation taper. H=max height             	   
+
+; Heaters
+M140 H0
+M307 H0 A102.0 C520.6 D1.1 S1.00 V23.9 B0	; Disable bang-bang mode for the bed heater and set PWM limit
+M308 S0 P"bedtemp" Y"thermistor" T100000 B4138 C0 R4700	A"Bed"	; Bed thermistor
+M950 H0 C"bedheat" T0						; Bed heater
+M143 H0 S120								; Set temperature limit for heater 0 to 120C
+M307 H1 A370.2 C225.8 D6.4 S1.00 V24.0 B0	; Extruder heater parameters
+M308 S1 P"e0temp" Y"thermistor" T100000 B4725 C7.060000e-8 R4700 A"Extruder"	; Extruder thermistor
+M950 H1 C"e0heat" T1						; Extruder heater
+M143 H1 S285								; Set temperature limit for heater 1 to 285C
+M308 S3 P"e1temp" Y"thermistor" T100000 B4725 C7.060000e-8 R4700 A"Chamber" 	; Chamber thermistor
+
+; Fans
+M950 F0 C"fan0" Q27000
+M106 P0 S0 I0 B1 F27000 H-1 C"Cooling"		; Set fan 0 value, PWM signal inversion and frequency. Thermostatic control is turned off
+M950 F1 C"fan1+^exp.pb6" Q100
+M106 P1 S1 I0 B1 F100 H1 T50 C"Hotend"		; Set fan 1 value, PWM signal inversion and frequency. Thermostatic control is turned on
+M950 F2 C"fan2" Q100
+M106 P2 S1 I0 B1 F100 H1 T50 C"Controller"	; Set fan 2 value, PWM signal inversion and frequency. Thermostatic control is turned on
+
+; Tools
+M563 P0 D0 H1								; Define tool 0
+G10 P0 X0 Y0 Z0								; Set tool 0 axis offsets
+G10 P0 R0 S0								; Set initial tool 0 active and standby temperatures to 0C
+
+; Automatic power saving
+M911 S23 R24 P"M913 X0 Y0 G91 M83 G1 E-5 F2700"	; Set voltage thresholds and actions to run on power loss
+
+; Miscellaneous
+M501										; Load saved parameters from non-volatile memory
+T0											; Select first tool
