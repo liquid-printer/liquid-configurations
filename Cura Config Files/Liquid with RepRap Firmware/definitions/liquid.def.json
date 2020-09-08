@@ -85,7 +85,7 @@
         "acceleration_wall_0": { "value": "math.ceil(acceleration_wall * 500 / 1000)" },
         "brim_width": { "value": "3" },
         "cool_fan_full_at_height": { "value": "layer_height_0 + 4 * layer_height" },
-        "cool_fan_speed": { "value": "50" },
+        "cool_fan_speed": { "value": "100" },
         "cool_fan_speed_max": { "value": "100" },
         "cool_min_speed": { "value": "5" },
 		"infill_line_width": { "value": "round(line_width * 0.5 / 0.35, 2)" },
