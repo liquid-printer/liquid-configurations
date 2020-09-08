@@ -5,9 +5,10 @@
 - Configuration files for RepRap Firmware
 
 ## Slicer Configuration
-- Liquid RepRap Firmware:
+- Liquid RepRap Firmware (Tested for Cura 4.7):
 Copy the content from the folder to {cura_installlation_folder}/resources/
-- Liquid Marlin Firmware, a tutorial for how to import profiles can be found at Prusa Help:
+- Liquid Marlin Firmware (Tested for Cura 4.5): 
+Use the tutorial for how to import profiles from Prusa Help:
 https://help.prusa3d.com/en/guide/how-to-import-profiles-to-cura-4-x-windows-macos_17848
 
 ## License
