@@ -17,6 +17,7 @@
 		"preferred_variant_name": "VO 0.4",
 		"preferred_quality_type": "normal",
 		"variants_name": "Extruder",
+		"supports_usb_connection": true,
 		"nozzle_offsetting_for_disallowed_areas": false,
 		"weight": -1,
         "machine_extruder_trains":
@@ -138,7 +139,9 @@
         "retraction_hop_enabled": { "value": "True"  },
         "retraction_hop_only_when_collides": { "value": "True" },
         "retraction_min_travel": { "value": "5" },
-        "retraction_prime_speed": { "value": "15" },
+        "retraction_speed": { "default_value": 35 },
+        "retraction_retract_speed": { "default_value": 35 },
+        "retraction_prime_speed": { "default_value": 35 },
 		
 		"skin_overlap": { "value": "10" },
         "speed_equalize_flow_enabled": { "value": "True" },
