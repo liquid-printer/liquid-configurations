@@ -139,8 +139,8 @@
         "retraction_hop_enabled": { "value": "True"  },
         "retraction_hop_only_when_collides": { "value": "True" },
         "retraction_min_travel": { "value": "5" },
-		"retraction_speed": { "value": "35" },
-		"retraction_retract_speed": { "value": "35" },
+        "retraction_speed": { "value": "35" },
+        "retraction_retract_speed": { "value": "35" },
         "retraction_prime_speed": { "value": "35" },
         
         "skin_overlap": { "value": "10" },
